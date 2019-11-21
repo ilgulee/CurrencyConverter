@@ -17,7 +17,6 @@ class NetworkModule {
     private fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("http://apilayer.net/api/")
-            //.addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(provideOkHttpClient())

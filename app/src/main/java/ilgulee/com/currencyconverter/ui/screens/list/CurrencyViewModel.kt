@@ -27,7 +27,7 @@ class CurrencyViewModel(application: Application) : AndroidViewModel(application
 
     private fun getRemoteData() {
         coroutineScope.launch {
-            _response.value = remoteDataSource.getLiveExchangeRatesProperty().quotes.toString()
+            _response.value = remoteDataSource.getCurrencyListResponse().currencies.toString()
         }
     }
 
@@ -44,7 +44,7 @@ class CurrencyViewModel(application: Application) : AndroidViewModel(application
                     application
                 ) as T
             }
-            throw IllegalArgumentException("Unable to construct viewmodel")
+            throw IllegalArgumentException("Unable to construct viewModel")
         }
     }
 
