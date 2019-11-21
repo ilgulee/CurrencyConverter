@@ -4,12 +4,33 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import ilgulee.com.currencyconverter.BuildConfig
-import okhttp3.OkHttpClient
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
+private const val KEY = "c5ce13d3a60761a6b3b937b160ea07d8"
+
 class NetworkModule {
+
+    companion object CurrencyInterceptor : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response {
+            val originalRequest: Request = chain.request()
+
+            val newUrl: HttpUrl = originalRequest.url().newBuilder()
+                .addQueryParameter("access_key", KEY)
+                .addQueryParameter("format", "1")
+                .build()
+
+            val newRequest: Request = originalRequest.newBuilder()
+                .url(newUrl)
+                .build()
+
+            return chain.proceed(newRequest)
+        }
+
+    }
+
     private val moshi: Moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
@@ -36,6 +57,7 @@ class NetworkModule {
     private fun provideOkHttpClient(): OkHttpClient {
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor(provideLoggingInterceptor())
+        httpClient.addInterceptor(CurrencyInterceptor)
         return httpClient.build()
     }
 

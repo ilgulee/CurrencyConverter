@@ -27,7 +27,7 @@ class CurrencyViewModel(application: Application) : AndroidViewModel(application
 
     private fun getRemoteData() {
         coroutineScope.launch {
-            _response.value = remoteDataSource.getCurrencyListResponse().currencies.toString()
+            _response.value = remoteDataSource.getLiveExchangeRatesProperty().quotes.toString()
         }
     }
 
