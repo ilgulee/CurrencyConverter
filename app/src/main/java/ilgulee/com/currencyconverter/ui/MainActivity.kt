@@ -1,7 +1,8 @@
-package ilgulee.com.currencyconverter
+package ilgulee.com.currencyconverter.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import ilgulee.com.currencyconverter.R
 
 class MainActivity : AppCompatActivity() {
 

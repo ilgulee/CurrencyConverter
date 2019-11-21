@@ -5,17 +5,20 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="ilgulee.com.currencyconverter.ui.screens.list.CurrencyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".CurrencyFragment">
+        tools:context=".ui.screens.list.CurrencyFragment">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello" />
+            android:text="@{viewModel.response}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

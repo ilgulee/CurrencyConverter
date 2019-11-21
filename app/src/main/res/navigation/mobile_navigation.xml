@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/currencyFragment"
-        android:name="ilgulee.com.currencyconverter.CurrencyFragment"
+        android:name="ilgulee.com.currencyconverter.ui.screens.list.CurrencyFragment"
         android:label="@string/currency_fragment"
         tools:layout="@layout/currency_fragment" />
 </navigation>
