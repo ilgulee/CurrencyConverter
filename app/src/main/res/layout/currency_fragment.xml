@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@{viewModel.response}" />
+            android:text="@{viewModel.currencyList.toString()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

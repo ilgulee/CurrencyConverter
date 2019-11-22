@@ -3,12 +3,18 @@ package ilgulee.com.currencyconverter.ui.screens.list
 import android.app.Application
 import androidx.lifecycle.*
 import ilgulee.com.currencyconverter.app.CurrencyApplication
+import ilgulee.com.currencyconverter.repository.CurrencyRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class CurrencyViewModel(application: Application) : AndroidViewModel(application) {
+    private val repository by lazy {
+        CurrencyRepository()
+    }
+    val currencyList = repository.currenciesList
+
     private val remoteDataSource by lazy {
         CurrencyApplication.getCurrencyApplication().currencyAppContainer.bindRemoteDataSource()
     }
@@ -22,12 +28,12 @@ class CurrencyViewModel(application: Application) : AndroidViewModel(application
     )
 
     init {
-        getRemoteData()
+        refreshCurrencyList()
     }
 
-    private fun getRemoteData() {
+    private fun refreshCurrencyList() {
         coroutineScope.launch {
-            _response.value = remoteDataSource.getLiveExchangeRatesProperty().quotes.toString()
+            repository.refreshCurrencyList()
         }
     }
 
