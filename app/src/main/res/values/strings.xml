@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Currency Converter</string>
     <string name="currency_fragment">Currency Converter</string>
+    <string name="edit_hint">Input amount of money</string>
+    <string name="unit_text">Some Country Money Unit</string>
 </resources>
