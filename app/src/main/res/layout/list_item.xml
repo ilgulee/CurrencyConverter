@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="currency"
+            type="ilgulee.com.currencyconverter.domain.Currency" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -33,6 +36,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:text="@{currency.symbol}"
                 tools:text="SCM" />
 
             <TextView
@@ -45,6 +49,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/text_view_symbol"
                 app:layout_constraintTop_toTopOf="@+id/text_view_symbol"
+                android:text="@{currency.exchangeRate.toString()}"
                 tools:text="12.3456" />
 
             <TextView
@@ -56,6 +61,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/text_view_rate"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_rate"
+                android:text="@{currency.unit}"
                 tools:text="Some Country Money" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
