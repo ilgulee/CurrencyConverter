@@ -8,9 +8,14 @@
         <variable
             name="currency"
             type="ilgulee.com.currencyconverter.domain.Currency" />
+
+        <variable
+            name="clickListener"
+            type="ilgulee.com.currencyconverter.ui.screens.list.CurrencyListener" />
     </data>
 
     <androidx.cardview.widget.CardView
+        android:onClick="@{() -> clickListener.onClick(currency)}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="@dimen/card_elevation"

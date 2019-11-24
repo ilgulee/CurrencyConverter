@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -40,7 +41,9 @@ class CurrencyFragment : Fragment() {
         )
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        val adapter = CurrencyAdapter()
+        val adapter = CurrencyAdapter(CurrencyListener {
+            Toast.makeText(context, "Clicked ${it}", Toast.LENGTH_LONG).show()
+        })
         binding.recyclerView.adapter = adapter
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
