@@ -67,13 +67,3 @@ class CurrencyViewModel(application: Application) : AndroidViewModel(application
     }
 }
 
-
-fun List<Currency>.asCalculatedList(newRate: Double): List<Currency> {
-    return map {
-        Currency(
-            symbol = it.symbol,
-            exchangeRate = it.exchangeRate?.div(newRate),
-            unit = it.unit
-        )
-    }
-}

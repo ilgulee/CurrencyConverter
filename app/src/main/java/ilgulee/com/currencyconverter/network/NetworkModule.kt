@@ -9,7 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-private const val KEY = "c5ce13d3a60761a6b3b937b160ea07d8"
+private const val KEY = "a1333d0832b1208792fdd9bd929adcf8"
 
 class NetworkModule {
 
