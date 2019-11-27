@@ -12,7 +12,7 @@ data class DatabaseCurrencyConversion(
     @ColumnInfo(name = "id")
     val symbol: String,
     val unit: String = "Any Country Money",
-    val exchangeRate: Double = -1.0
+    val exchangeRate: Double = 1.0
 )
 
 fun List<DatabaseCurrencyConversion>.asCurrencyListDomain(): List<Currency> {

@@ -43,16 +43,17 @@ class CurrencyFragment : Fragment() {
         binding.lifecycleOwner = this
         val adapter = CurrencyAdapter(CurrencyListener {
             Toast.makeText(context, "Clicked ${it}", Toast.LENGTH_LONG).show()
+            viewModel.changeSourceByClick(it)
         })
         binding.recyclerView.adapter = adapter
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        viewModel.currencyList.observe(viewLifecycleOwner, Observer {
+
+        viewModel.originalCurrencyList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
         })
-
         return binding.root
     }
 

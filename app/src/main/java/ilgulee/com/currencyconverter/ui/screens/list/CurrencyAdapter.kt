@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ilgulee.com.currencyconverter.databinding.ListItemBinding
 import ilgulee.com.currencyconverter.domain.Currency
 
-class CurrencyAdapter(val currencyListener: CurrencyListener) :
+class CurrencyAdapter(private val currencyListener: CurrencyListener) :
     ListAdapter<Currency, CurrencyAdapter.ViewHolder>(CurrencyDiffUtilCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)

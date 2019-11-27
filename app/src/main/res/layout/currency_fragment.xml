@@ -48,16 +48,32 @@
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
                     android:padding="@dimen/text_padding"
+                    android:text="@={viewModel.input}"
                     android:textAlignment="viewEnd" />
 
-                <TextView
-                    android:id="@+id/text_view_unit"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/text_padding"
-                    android:text="@string/unit_text"
-                    android:textAlignment="viewEnd"
-                    android:textSize="18sp" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Button"
+                        android:visibility="gone"
+                        tools:text="Calculate" />
+
+                    <TextView
+                        android:id="@+id/text_view_unit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/text_padding"
+                        android:text="@{viewModel.source.unit}"
+                        android:textAlignment="viewEnd"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
