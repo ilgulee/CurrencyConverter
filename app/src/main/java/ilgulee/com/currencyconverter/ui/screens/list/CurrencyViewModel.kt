@@ -1,7 +1,6 @@
 package ilgulee.com.currencyconverter.ui.screens.list
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import ilgulee.com.currencyconverter.domain.Currency
 import ilgulee.com.currencyconverter.repository.CurrencyRepository
@@ -29,13 +28,20 @@ class CurrencyViewModel(application: Application) : AndroidViewModel(application
     private val _source = MutableLiveData<Currency>()
     val source: LiveData<Currency> = _source
 
+    private var _eventNetworkError = MutableLiveData<Boolean>(false)
+    val eventNetworkError: LiveData<Boolean>
+        get() = _eventNetworkError
+
+    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
+    val isNetworkErrorShown: LiveData<Boolean>
+        get() = _isNetworkErrorShown
+
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(
         viewModelJob + Dispatchers.Main
     )
 
     init {
-        Log.i("init", "init")
         refreshCurrencyList()
 
         defaultSource = Currency("USD", 0.0, "United States Dollar")
@@ -45,8 +51,21 @@ class CurrencyViewModel(application: Application) : AndroidViewModel(application
 
     private fun refreshCurrencyList() {
         coroutineScope.launch {
-            repository.refreshCurrencyList()
+            try {
+                repository.refreshCurrencyList()
+                _eventNetworkError.value = false
+                _isNetworkErrorShown.value = false
+            } catch (e: Exception) {
+                if (originalCurrencyList.value.isNullOrEmpty()) {
+                    _eventNetworkError.value = true
+                }
+            }
+
         }
+    }
+
+    fun onNetworkErrorShown() {
+        _isNetworkErrorShown.value = true
     }
 
     override fun onCleared() {
@@ -64,17 +83,13 @@ class CurrencyViewModel(application: Application) : AndroidViewModel(application
         val divider = currency.exchangeRate
         input.value = divider?.let { currency.exchangeRate!!.div(it).toString() }
         _source.value = currency
-        Log.i("changeSourceByClick", "${_source.value}")
         _adapterData.value =
             divider?.let { viewModelReference.asCalculatedCurrenciesList(divider = it) }
         listDataForCalculation = _adapterData.value!!
     }
 
     fun setDataInsideViewModel(list: List<Currency>) {
-        Log.i("setDataInsideViewModel", "setDataInsideViewModel")
-
         _source.value = defaultSource
-        Log.i("setDataInsideViewModel", "${_source.value}")
         _adapterData.value = list
         viewModelReference = list
         listDataForCalculation = list
