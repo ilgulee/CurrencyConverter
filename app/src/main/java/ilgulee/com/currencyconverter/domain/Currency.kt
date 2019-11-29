@@ -2,6 +2,6 @@ package ilgulee.com.currencyconverter.domain
 
 data class Currency(
     val symbol: String,
-    val exchangeRate: Double?,
+    var exchangeRate: Double?,
     val unit: String?
 )

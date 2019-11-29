@@ -42,18 +42,33 @@ class CurrencyFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         val adapter = CurrencyAdapter(CurrencyListener {
-            Toast.makeText(context, "Clicked ${it}", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "You changed source standard.", Toast.LENGTH_LONG).show()
             viewModel.changeSourceByClick(it)
         })
         binding.recyclerView.adapter = adapter
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
-        viewModel.originalCurrencyList.observe(viewLifecycleOwner, Observer {
+        viewModel.originalCurrencyList.observe(this, Observer {
+            it?.let {
+                viewModel.setDataInsideViewModel(it)
+            }
+        })
+
+        viewModel.adapterData.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
         })
+
+        viewModel.input.observe(this, Observer {
+            it?.let {
+                if (!it.isBlank() && it.toDouble() > 0.0) {
+                    viewModel.calculateCurrenciesList(it.toDouble())
+                }
+            }
+        })
+
         return binding.root
     }
 
